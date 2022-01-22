@@ -6,6 +6,10 @@ export const mainSchema = gql`
   type Query {
     version: String
   }
+
+  type Mutation {
+    version: String
+  }
 `;
 
 export * from './product.schema';

@@ -12,20 +12,6 @@
     "removeComments": true,
     "resolveJsonModule": true,
     "target": "es2017",
-    "paths": {
-      "@config/*": ["config/*"],
-      "@core/*": ["core/*"],
-      "@models/*": ["core/models/*"],
-      "@services/*": ["core/services/*"],
-      "@actions/*": ["core/actions/*"],
-      "@exceptions/*": ["core/exceptions/*"],
-      "@interfaces/*": ["core/interfaces/*"],
-      "@utils/*": ["core/utils/*"],
-      "@gql/*": ["gql/*"],
-      "@rest/*": ["rest/*"],
-      "@workers/*": ["workers/*"],
-      "@src/*": ["*"]
-    }
   },
   "exclude": ["dist/*", "node_modules", "coverage/*"]
 }

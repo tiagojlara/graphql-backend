@@ -7,4 +7,14 @@ export const ProductSchema = gql`
     qtd: Float
     price: Float
   }
+
+  input ProductInput {
+    name: String
+    qtd: Float
+    price: Float
+  }
+
+  extend type Mutation {
+    createProduct(product: ProductInput): Product
+  }
 `;
