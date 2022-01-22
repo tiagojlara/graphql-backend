@@ -14,9 +14,9 @@ describe('Product Graph', () => {
     jest.clearAllMocks();
   });
 
-  describe('createProduct mutation', () => {
+  describe('Mutations', () => {
 
-    it('should call product service', async () => {
+    test('createProduct', async () => {
 
       const serviceMock = jest.spyOn(productService, 'createProduct').mockImplementationOnce(async () => productMock);
 
@@ -43,12 +43,7 @@ describe('Product Graph', () => {
 
     });
 
-  });
-
-
-  describe('createProduct mutation', () => {
-
-    it('should call product service', async () => {
+    test('createProducts', async () => {
 
       const serviceMock = jest.spyOn(productService, 'createProducts').mockImplementationOnce(async () => [productMock]);
 
@@ -75,6 +70,38 @@ describe('Product Graph', () => {
         createProducts: expect.arrayContaining([
           expect.objectContaining(productMock)
         ])
+      });
+
+    });
+
+  });
+
+
+  describe('Query', () => {
+
+    test('getProductById', async () => {
+
+      const serviceMock = jest.spyOn(productService, 'getProductById')
+        .mockImplementationOnce(async (id) => ({ id, ...productMock}) );
+
+      const GET_PRODUCT = gql`
+        query {
+          getProductById(id: 10) {
+            id
+            name,
+            qtd,
+            price
+          }
+        }`;
+
+      const result = await server.executeOperation({
+        query: GET_PRODUCT,
+      });
+
+      expect(result.errors).toBeUndefined();
+      expect(serviceMock).toHaveBeenCalledWith(10);
+      expect(result.data).toMatchObject({
+        getProductById: expect.objectContaining({id: 10, ...productMock})
       });
 
     });

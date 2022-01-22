@@ -14,6 +14,10 @@ export const ProductSchema = gql`
     price: Float
   }
 
+  extend type Query {
+    getProductById(id: Int): Product
+  }
+
   extend type Mutation {
     createProduct(product: ProductInput): Product
     createProducts(products: [ProductInput]): [Product]
