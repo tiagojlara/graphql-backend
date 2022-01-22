@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+database.sqlite
+coverage/
+kubernetes/deploy.yaml
+newrelic_agent.log
+yarn-error.log
