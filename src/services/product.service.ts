@@ -10,3 +10,6 @@ export const createProducts = (payload: Product[]) => repository().save(payload)
 export const getProductById = (id: number) => repository().findOneOrFail({ where: { id } });
 
 export const getProductByIds = (ids: number[]) => repository().findByIds(ids);
+
+export const getProducts = (filters: { skip: number, limit: number }) =>
+  repository().findAndCount({ skip: filters.skip, take: filters.limit  })

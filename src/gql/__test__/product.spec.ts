@@ -106,6 +106,42 @@ describe('Product Graph', () => {
 
     });
 
+    test('products', async () => {
+
+      const serviceMock = jest.spyOn(productService, 'getProducts')
+        .mockImplementationOnce(async () => [[productMock], 1 ]);
+
+      const GET_PRODUCTS = gql`
+        query {
+          products(filters: {
+            skip: 0,
+            limit: 10
+          }) {
+            records {
+              id
+              name,
+              qtd,
+              price
+            }
+            total
+          }
+        }`;
+
+      const result = await server.executeOperation({
+        query: GET_PRODUCTS,
+      });
+
+      expect(result.errors).toBeUndefined();
+      expect(serviceMock).toHaveBeenCalledWith({ skip: 0, limit: 10 });
+      expect(result.data?.products).toMatchObject({
+        records: expect.arrayContaining([
+          expect.objectContaining(productMock)
+        ]),
+        total: 1
+      });
+
+    });
+
   });
 
 })

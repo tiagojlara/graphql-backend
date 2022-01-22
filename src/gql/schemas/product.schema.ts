@@ -8,14 +8,25 @@ export const ProductSchema = gql`
     price: Float
   }
 
+  type ProductSearchResponse {
+    records: [Product]
+    total: Int
+  }
+
   input ProductInput {
-    name: String
-    qtd: Float
-    price: Float
+    name: String!
+    qtd: Float!
+    price: Float!
+  }
+
+  input ProductFilter {
+    skip: Int!
+    limit: Int!
   }
 
   extend type Query {
     getProductById(id: Int): Product
+    products(filters: ProductFilter): ProductSearchResponse
   }
 
   extend type Mutation {

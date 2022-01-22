@@ -1,4 +1,4 @@
-import { createProduct, createProducts, getProductById } from '../../services/product.service';
+import { createProduct, createProducts, getProductById, getProducts } from '../../services/product.service';
 
 export const ProductResolver = {
 
@@ -8,7 +8,11 @@ export const ProductResolver = {
   },
 
   Query: {
-    getProductById: (_: any, { id }) => getProductById(id)
+    getProductById: (_: any, { id }) => getProductById(id),
+
+    products: async (_: any, { filters }) =>
+      getProducts(filters)
+        .then(([records, total]) => ({ records, total }))
   }
 
 };
