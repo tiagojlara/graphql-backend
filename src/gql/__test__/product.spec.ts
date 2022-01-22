@@ -45,4 +45,40 @@ describe('Product Graph', () => {
 
   });
 
+
+  describe('createProduct mutation', () => {
+
+    it('should call product service', async () => {
+
+      const serviceMock = jest.spyOn(productService, 'createProducts').mockImplementationOnce(async () => [productMock]);
+
+      const CREATE_PRODUCT = gql`
+        mutation {
+          createProducts(products: [{
+            name: "${productMock.name}",
+            qtd: ${productMock.qtd}
+            price: ${productMock.price}
+          }]) {
+            name,
+            qtd,
+            price
+          }
+        }`;
+
+      const result = await server.executeOperation({
+        query: CREATE_PRODUCT,
+      });
+
+      expect(result.errors).toBeUndefined();
+      expect(serviceMock).toHaveBeenCalledWith([{...productMock}]);
+      expect(result.data).toMatchObject({
+        createProducts: expect.arrayContaining([
+          expect.objectContaining(productMock)
+        ])
+      });
+
+    });
+
+  });
+
 })

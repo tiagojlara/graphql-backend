@@ -16,5 +16,6 @@ export const ProductSchema = gql`
 
   extend type Mutation {
     createProduct(product: ProductInput): Product
+    createProducts(products: [ProductInput]): [Product]
   }
 `;
