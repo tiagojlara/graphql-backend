@@ -1,4 +1,9 @@
-import { server } from "./gql/server";
-import { logger } from "./utils/logger";
+import { server } from './gql/server';
+import { logger } from './utils/logger';
+import { connection } from './database';
 
-server.listen().then(({ url }) => logger.info(`server running at url ${url}`) );
+connection.then(() =>
+  server
+    .listen()
+    .then(({ url }) => logger.info(`server running at url ${url}`))
+);
