@@ -1,7 +1,7 @@
-import { getConnection } from 'typeorm';
+import { getConnection, In } from 'typeorm';
 
 import { Customer } from '../entities/customer.entity';
-import { Order } from './../entities/order.entity';
+import { Order, OrderItem } from './../entities/order.entity';
 import { Product } from './../entities/product.entity';
 import { findOrCreateCustomer } from './customer.service';
 import { decreaseStock, getProductByIds } from './product.service';
@@ -13,6 +13,17 @@ interface OrderItemsInput {
 
 const repository = () => getConnection().getRepository(Order);
 
+export const getOrderById = (id: number) => repository().findOneOrFail(id);
+
+export const getOrdersItems = (orderIds: number[]) => 
+  getConnection()
+    .getRepository(OrderItem)
+    .find({
+      where: {
+        orderId: In(orderIds)
+      }
+    });
+
 const validateStock = (items: { [key: number]: number }) => (products: Product[]) =>
   products.map((p) => {
     if (items[p.id] > p.qtd) {
@@ -22,7 +33,11 @@ const validateStock = (items: { [key: number]: number }) => (products: Product[]
     return p;
   });
 
-export const createOrder = async (items: OrderItemsInput[], customer: Customer, deliveryDate: Date) => {
+export const createOrder = async (
+  items: OrderItemsInput[],
+  customer: Customer,
+  deliveryDate: Date,
+) => {
   const [productIds, productMap] = items.reduce(
     (pv, cv) => {
       pv[0].push(cv.productId);
@@ -53,7 +68,7 @@ export const createOrder = async (items: OrderItemsInput[], customer: Customer, 
     items: orderItemsPayload,
     customer: customerEntity,
     totalPrice,
-    deliveryDate
+    deliveryDate,
   });
 
   await Promise.all(products.map(({ id }) => decreaseStock(Number(id), Number(productMap[id]))));

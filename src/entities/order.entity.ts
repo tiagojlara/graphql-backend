@@ -11,11 +11,17 @@ export class Order {
   @ManyToOne(() => Customer)
   customer: Customer;
 
-  @OneToMany(() => OrderItem, (item) => item.order)
+  @OneToMany(() => OrderItem, (item) => item.order, { cascade: true })
   items: OrderItem[];
 
   @Column('double')
   totalPrice: number;
+
+  @Column('date')
+  deliveryDate: Date;
+
+  @Column('int')
+  customerId?: number;
 }
 
 @Entity()
@@ -35,7 +41,9 @@ export class OrderItem {
   @Column('double')
   price: number;
 
-  @Column('date')
-  deliveryDate: Date;
+  @Column('int')
+  orderId: number;
 
+  @Column('int')
+  productId: number;
 }

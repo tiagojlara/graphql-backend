@@ -5,6 +5,7 @@ export const OrderSchema = gql`
     product: Product
     qtd: Float
     price: Float
+    orderId: Int
   }
 
   type Order {
@@ -35,5 +36,9 @@ export const OrderSchema = gql`
 
   extend type Mutation {
     createOrder(order: OrderInput): Order
+  }
+
+  extend type Query {
+    order(id: Int): Order
   }
 `;
