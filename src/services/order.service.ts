@@ -32,7 +32,7 @@ export const createOrder = async (items: OrderItemsInput[], customer: Customer) 
     [[], {}],
   );
 
-  const products = await getProductByIds(productIds).then(validateStock(productMap));
+  const products = await getProductByIds(productIds).then(validateStock(productMap)); // eslint-disable-line
 
   if (products.length < productIds.length) {
     throw new Error('some products were not found');
@@ -55,7 +55,7 @@ export const createOrder = async (items: OrderItemsInput[], customer: Customer) 
     totalPrice,
   });
 
-  await Promise.all(products.map(({ id }) => decreaseStock(id, productMap[id])));
+  await Promise.all(products.map(({ id }) => decreaseStock(Number(id), Number(productMap[id]))));
 
   return order;
 };

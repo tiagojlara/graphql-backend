@@ -1,3 +1,4 @@
+import { Product } from '../../entities/product.entity';
 import {
   createProduct,
   createProducts,
@@ -7,14 +8,14 @@ import {
 
 export const ProductResolver = {
   Mutation: {
-    createProduct: (_: any, { product }) => createProduct(product),
-    createProducts: (_: any, { products }) => createProducts(products),
+    createProduct: (_: any, { product }: { product: Product }) => createProduct(product),
+    createProducts: (_: any, { products }: { products: Product[] }) => createProducts(products),
   },
 
   Query: {
-    getProductById: (_: any, { id }) => getProductById(id),
+    getProductById: (_: any, { id }: { id: number }) => getProductById(id),
 
-    products: async (_: any, { filters }) =>
+    products: async (_: any, { filters }: { filters: { skip: number; limit: number } }) =>
       getProducts(filters).then(([records, total]) => ({ records, total })),
   },
 };
