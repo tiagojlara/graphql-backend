@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { connection } from './database';
 import { server } from './gql/server';
 import { logger } from './utils/logger';
