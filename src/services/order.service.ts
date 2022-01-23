@@ -15,7 +15,7 @@ const repository = () => getConnection().getRepository(Order);
 
 const validateStock = (items: { [key: number]: number }) => (products: Product[]) =>
   products.map((p) => {
-    if (items[p.id] >= p.qtd) {
+    if (items[p.id] > p.qtd) {
       throw new Error(`product id: ${p.id} is out of stock`);
     }
 

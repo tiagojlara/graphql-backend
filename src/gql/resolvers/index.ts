@@ -5,3 +5,4 @@ export const mainResolver = {
 };
 
 export * from './product.resolver';
+export * from './order.resolver';

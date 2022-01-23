@@ -13,3 +13,5 @@ export const mainSchema = gql`
 `;
 
 export * from './product.schema';
+export * from './customer.schema';
+export * from './order.schema';
