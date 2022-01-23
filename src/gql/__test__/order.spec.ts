@@ -22,7 +22,7 @@ describe('Order Graph', () => {
 
       const serviceMock = jest
         .spyOn(orderService, 'createOrder')
-        .mockImplementationOnce(async (items, customer) => ({ id: 1, items: [], totalPrice: 400, customer }));
+        .mockImplementationOnce(async (items, customer, deliveryDate) => ({ id: 1, items: [], totalPrice: 400, customer, deliveryDate }));
 
       const CREATE_ORDER = gql`
         mutation {
@@ -46,8 +46,7 @@ describe('Order Graph', () => {
       });
 
       expect(result.errors).toBeUndefined();
-      expect(serviceMock).toHaveBeenCalledWith([{ productId: 1, qtd: 2 }], customer);
-      // expect(result.data?.createProduct?.name).toBe(productMock.name);
+      expect(serviceMock).toHaveBeenCalledWith([{ productId: 1, qtd: 2 }], customer, new Date(1642949002241));
     });
 
   });

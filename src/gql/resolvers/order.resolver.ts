@@ -14,6 +14,6 @@ interface OrderInput {
 export const OrderResolver = {
   Mutation: {
     createOrder: (_: any, { order }: { order: OrderInput }) =>
-      createOrder(order.items, order.customer),
+      createOrder(order.items, order.customer, order.deliveryDate),
   },
 };

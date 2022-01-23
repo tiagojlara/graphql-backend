@@ -28,6 +28,7 @@ describe('Order Service', () => {
       name: 'Customer Test',
       address: 'test street',
       email: 'teste@test.com',
+      phone: '999999999'
     };
 
     afterEach(() => jest.clearAllMocks());
@@ -49,6 +50,7 @@ describe('Order Service', () => {
             { productId: 11, qtd: 3 },
           ],
           customer,
+          new Date()
         );
       } catch (e) {
         expect(e.message).toBe('product id: 11 is out of stock');
@@ -69,6 +71,7 @@ describe('Order Service', () => {
             { productId: 11, qtd: 3 },
           ],
           customer,
+          new Date()
         );
       } catch (e) {
         expect(e.message).toBe('some products were not found');
@@ -89,6 +92,7 @@ describe('Order Service', () => {
         order = await createOrder(
           products.map((p) => ({ productId: p.id, qtd: 2 })),
           customer,
+          new Date()
         );
       });
 

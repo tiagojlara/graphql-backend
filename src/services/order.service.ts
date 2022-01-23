@@ -22,7 +22,7 @@ const validateStock = (items: { [key: number]: number }) => (products: Product[]
     return p;
   });
 
-export const createOrder = async (items: OrderItemsInput[], customer: Customer) => {
+export const createOrder = async (items: OrderItemsInput[], customer: Customer, deliveryDate: Date) => {
   const [productIds, productMap] = items.reduce(
     (pv, cv) => {
       pv[0].push(cv.productId);
@@ -53,6 +53,7 @@ export const createOrder = async (items: OrderItemsInput[], customer: Customer) 
     items: orderItemsPayload,
     customer: customerEntity,
     totalPrice,
+    deliveryDate
   });
 
   await Promise.all(products.map(({ id }) => decreaseStock(Number(id), Number(productMap[id]))));

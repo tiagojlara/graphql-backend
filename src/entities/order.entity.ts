@@ -34,4 +34,8 @@ export class OrderItem {
 
   @Column('double')
   price: number;
+
+  @Column('date')
+  deliveryDate: Date;
+
 }
