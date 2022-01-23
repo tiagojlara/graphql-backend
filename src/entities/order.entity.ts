@@ -1,27 +1,25 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+
 import { Customer } from './customer.entity';
 import { Product } from './product.entity';
 
 @Entity()
 export class Order {
-
   @PrimaryGeneratedColumn()
   id?: number;
 
   @ManyToOne(() => Customer)
   customer: Customer;
 
-  @OneToMany(() => OrderItem, item => item.order)
-  items: OrderItem[]
+  @OneToMany(() => OrderItem, (item) => item.order)
+  items: OrderItem[];
 
   @Column('double')
-  totalPrice: number
-
+  totalPrice: number;
 }
 
 @Entity()
 export class OrderItem {
-
   @PrimaryGeneratedColumn()
   id?: number;
 
@@ -32,9 +30,8 @@ export class OrderItem {
   product: Product;
 
   @Column('double')
-  qtd: number
+  qtd: number;
 
   @Column('double')
-  price: number
-
+  price: number;
 }

@@ -2,7 +2,6 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
-
   @PrimaryGeneratedColumn()
   id?: number;
 
@@ -14,5 +13,4 @@ export class Product {
 
   @Column('double')
   price: number;
-
 }

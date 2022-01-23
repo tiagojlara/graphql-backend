@@ -1,9 +1,10 @@
-import { ApolloServer, gql } from 'apollo-server';
 import { makeExecutableSchema } from '@graphql-tools/schema';
+import { ApolloServer, gql } from 'apollo-server';
 import merge from 'lodash/merge';
+
 import * as resolvers from './resolvers';
-import * as schemas from './schemas';
 import * as scalars from './scalars';
+import * as schemas from './schemas';
 
 const schema = makeExecutableSchema({
   typeDefs: Object.values(schemas),
