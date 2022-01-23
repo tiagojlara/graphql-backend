@@ -17,8 +17,8 @@ export const OrderSchema = gql`
 
   input CustomerInput {
     name: String
-    email: String
-    phone: String
+    email: String!
+    phone: String!
     address: String
   }
 

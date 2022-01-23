@@ -10,6 +10,9 @@ export class Customer {
 
   @Column({ unique: true })
   email: string;
+  
+  @Column({ unique: true })
+  phone: string;
 
   @Column({ nullable: false })
   address: string;
