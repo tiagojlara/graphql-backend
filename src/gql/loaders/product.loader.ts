@@ -1,7 +1,7 @@
 import DataLoader from 'dataloader';
-import { getProductByIds } from './../../services/product.service';
 
 import { Product } from './../../entities/product.entity';
+import { getProductByIds } from './../../services/product.service';
 import { hydrateDataLoader } from './../../utils';
 
 type BatchProduct = (ids: number[]) => Promise<Product[]>;

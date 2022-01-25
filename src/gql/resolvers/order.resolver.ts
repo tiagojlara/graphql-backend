@@ -18,13 +18,13 @@ export const OrderResolver = {
     customer: (parent: Order, _, context: Context) =>
       parent.customer || context.customersLoader.load(parent.customerId),
 
-    items: (parent: Order, _, context: Context) => 
+    items: (parent: Order, _, context: Context) =>
       parent.items || context.orderItemsLoader.load(parent.id),
   },
 
   OrderItem: {
     product: (parent: OrderItem, _, context: Context) =>
-      parent.product || context.productLoader.load(parent.productId)
+      parent.product || context.productLoader.load(parent.productId),
   },
 
   Mutation: {

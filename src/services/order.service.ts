@@ -15,13 +15,13 @@ const repository = () => getConnection().getRepository(Order);
 
 export const getOrderById = (id: number) => repository().findOneOrFail(id);
 
-export const getOrdersItems = (orderIds: number[]) => 
+export const getOrdersItems = (orderIds: number[]) =>
   getConnection()
     .getRepository(OrderItem)
     .find({
       where: {
-        orderId: In(orderIds)
-      }
+        orderId: In(orderIds),
+      },
     });
 
 const validateStock = (items: { [key: number]: number }) => (products: Product[]) =>

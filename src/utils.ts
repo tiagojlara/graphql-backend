@@ -1,8 +1,8 @@
-import { productLoader } from './gql/loaders/product.loader';
 import { groupBy } from 'lodash';
 
 import { customersLoader } from './gql/loaders/customer.loader';
 import { orderItemsLoader } from './gql/loaders/order.loader';
+import { productLoader } from './gql/loaders/product.loader';
 
 export interface Context {
   customersLoader?: ReturnType<typeof customersLoader>;

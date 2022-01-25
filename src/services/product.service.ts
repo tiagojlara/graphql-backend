@@ -16,7 +16,11 @@ export const getProducts = (filters: { skip: number; limit: number }) =>
   repository().findAndCount({ skip: filters.skip, take: filters.limit });
 
 export const getProductsInStock = (filters: { skip: number; limit: number }) =>
-  repository().findAndCount({ skip: filters.skip, take: filters.limit, where: { qtd: { $gte: 1 } } });
+  repository().findAndCount({
+    skip: filters.skip,
+    take: filters.limit,
+    where: { qtd: { $gte: 1 } },
+  });
 
 export const decreaseStock = (id: number, qtd: number) =>
   getProductById(id)

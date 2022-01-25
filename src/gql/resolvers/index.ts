@@ -6,9 +6,9 @@ export const mainResolver = {
   },
 
   Mutation: {
-    login: (_: any, { username, pass }: { username: string, pass: string }) =>
-      generateToken(username, pass)
-  }
+    login: (_: any, { username, pass }: { username: string; pass: string }) =>
+      generateToken(username, pass),
+  },
 };
 
 export * from './product.resolver';
