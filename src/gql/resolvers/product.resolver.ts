@@ -4,6 +4,7 @@ import {
   createProducts,
   getProductById,
   getProducts,
+  getProductsInStock,
 } from '../../services/product.service';
 
 export const ProductResolver = {
@@ -17,5 +18,8 @@ export const ProductResolver = {
 
     products: async (_: any, { filters }: { filters: { skip: number; limit: number } }) =>
       getProducts(filters).then(([records, total]) => ({ records, total })),
+
+    availableProducts: async (_: any, { filters }: { filters: { skip: number; limit: number } }) =>
+      getProductsInStock(filters).then(([records, total]) => ({ records, total })),
   },
 };

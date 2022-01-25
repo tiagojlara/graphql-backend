@@ -27,6 +27,7 @@ export const ProductSchema = gql`
   extend type Query {
     getProductById(id: Int): Product
     products(filters: ProductFilter): ProductSearchResponse
+    availableProducts(filters: ProductFilter): ProductSearchResponse
   }
 
   extend type Mutation {
