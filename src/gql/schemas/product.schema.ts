@@ -26,12 +26,12 @@ export const ProductSchema = gql`
 
   extend type Query {
     getProductById(id: Int): Product
-    products(filters: ProductFilter): ProductSearchResponse
+    products(filters: ProductFilter): ProductSearchResponse @auth(requires: SELLER)
     availableProducts(filters: ProductFilter): ProductSearchResponse
   }
 
   extend type Mutation {
-    createProduct(product: ProductInput): Product
-    createProducts(products: [ProductInput]): [Product]
+    createProduct(product: ProductInput): Product @auth(requires: SELLER)
+    createProducts(products: [ProductInput]): [Product] @auth(requires: SELLER)
   }
 `;

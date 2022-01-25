@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server';
+import { generateToken } from '../../services/auth.service';
 
 import * as productService from '../../services/product.service';
 import { server } from '../server';
@@ -9,6 +10,8 @@ describe('Product Graph', () => {
     qtd: 10,
     price: 20,
   };
+
+  const sellerToken = generateToken('test', 'test');
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -35,7 +38,8 @@ describe('Product Graph', () => {
 
       const result = await server.executeOperation({
         query: CREATE_PRODUCT,
-      });
+      // @ts-ignore
+      }, { req: { headers: { Authorization: sellerToken } } });
 
       expect(result.errors).toBeUndefined();
       expect(serviceMock).toHaveBeenCalledWith({ ...productMock });
@@ -62,7 +66,8 @@ describe('Product Graph', () => {
 
       const result = await server.executeOperation({
         query: CREATE_PRODUCT,
-      });
+      // @ts-ignore
+      }, { req: { headers: { Authorization: sellerToken } } });
 
       expect(result.errors).toBeUndefined();
       expect(serviceMock).toHaveBeenCalledWith([{ ...productMock }]);
@@ -121,7 +126,8 @@ describe('Product Graph', () => {
 
       const result = await server.executeOperation({
         query: GET_PRODUCTS,
-      });
+      // @ts-ignore
+      }, { req: { headers: { Authorization: sellerToken } } });
 
       expect(result.errors).toBeUndefined();
       expect(serviceMock).toHaveBeenCalledWith({ skip: 0, limit: 10 });
