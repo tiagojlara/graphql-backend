@@ -38,7 +38,7 @@ By default, the system is using sqlite storage. This is not a reliable solution 
 ## Login
 For seller endpoint restrictions, you need to generate a new token using the login mutation. You need to copy this token and use it as an Authorization parameter on restricted queries/mutations.
 
-## Improvments
+## Improvements
  - Create a docker image with docker-compose to run the project locally
  - Create migration files instead of sync option in ORM config
  - Create pipeline
